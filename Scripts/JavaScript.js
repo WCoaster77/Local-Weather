@@ -13,17 +13,20 @@ function getAPI(position) {
         console.log(str);
         data.weather.forEach(function (list) {  // Create array of the current weather
             currWeath.push(list.description);
-            alert(currWeath[i]);
-            i++;
-            return currWeath;
         });
-        });
-    console.log(currWeath[0]);
-    document.getElementById("weather").innerHTML = "weather ==>" + currWeath;
-    //console.log(currWeath[1]);
-};
+        console.log(currWeath[0]);
+        document.getElementById("weather").innerHTML = "weather ==> " + currWeath[0];
+        return currWeath;
+    });
+    //console.log(currWeath[0]);
+    //document.write(currWeath);
+    document.getElementById("wind").innerHTML = "weather ==>" + currWeath[0]; // Why this doesn't work?
+}
+
 
 navigator.geolocation.getCurrentPosition(getAPI);
+
+
 
 //function getWeather(data) {
 //    for (i = 0; i < data.weather.length; i++) {
