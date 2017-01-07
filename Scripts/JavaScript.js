@@ -3,7 +3,7 @@ var cityName = [];
 var data = {};
 var str = 'start';
 
-function getPosition() {
+function getPosition() { // Check for location services active and get position
     if (navigator.geolocation) { // Check for location capability and get weather if true
         navigator.geolocation.getCurrentPosition(getAPI);
     } else {
@@ -12,7 +12,7 @@ function getPosition() {
     }
 }
 
-function getAPI(position) { // Use location to populate weather data call
+function getAPI(position) { // Use location from position to populate weather data API call
 
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
@@ -24,16 +24,26 @@ function getAPI(position) { // Use location to populate weather data call
 function createStr(data) { // Populate variables from API data return
     var coord = data.coord,
         weather = [],
-        main = data.main,
+        icon = new Image(),
+        tempK = data.main.temp,
         wind = data.wind,
-        sys = data.sys,
-        name = data.name,
-        currweather = '';
+        country = data.sys.country,
+        city = data.name,
+        currweather =
+        arrTest = [];
 
     data.weather.forEach(function (list) {
-        weather.push(list.main);
+        weather.push(list.main, (list.icon + '.png')); // Creates string for icon image src string
     });
-    prtAlert(weather);
+    icon.src = 'http://openweathermap.org/img/w/' + weather[1];
+
+    arrTest.push(coord, weather, temp, wind, country, city); // Maybe use this later
+
+    document.getElementById("city").innerHTML = city + ', ' + country;
+    document.getElementById("temp").innerHTML = (tempK - 273) + ' C ' + (((tempK - 273) * 9 / 5) + 32) + ' F';
+    document.getElementById("weather").innerHTML = weather[0];
+    document.getElementById("test").appendChild(icon); //doc element must be <div> not <p>
+    document.getElementById("wind").innerHTML = 'Wind Speed: ' + wind.speed + ' Direction: ' + wind.deg;
 }
 
 function prtAlert(msg) {
