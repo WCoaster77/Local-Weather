@@ -2,25 +2,22 @@
     height: 100%;
 }
 
-img {
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
-    overflow: hidden;
+body {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    margin: 0;
 }
 
-.sect {
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+main {
+    flex: 0 0 100%;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
 }
 
-.well {
-    background: rgb(255, 255, 255); /*The Fallback*/
-    background: rgba(255, 255, 255, 0.7);
-    border:none;
-    border-top: none;
-    border-top-color: none;
-    border-color:none;
+main p {
+
 }
