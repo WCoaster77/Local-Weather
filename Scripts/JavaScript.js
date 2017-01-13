@@ -31,6 +31,8 @@ function createStr(data) { // Populate variables from API data return
         weather.push(list.main, 'http://openweathermap.org/img/w/' + list.icon + '.png'); // Creates string for icon image src string
     });
 
+    prtAlert(weather);
+
     for (var i = 1, w = 0; w < weather.length; i += 2, w += 2) {
         var icon = new Image();
         icon.src = weather[i];
@@ -42,6 +44,7 @@ function createStr(data) { // Populate variables from API data return
     document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + ' C ' 
         + Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + ' F';
     document.getElementById("wind").innerHTML = 'Wind Speed: ' + wind.speed + ' Direction: ' + wind.deg;
+    document.getElementById("compass").style.setProperty('--direction', wind.deg);
 
     arrTest.push(coord, weather, tempK, wind, country, city); // Maybe use this later
 }
