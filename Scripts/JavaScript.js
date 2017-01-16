@@ -1,5 +1,5 @@
-﻿
-function getPosition() { // Check for location services active and get position
+﻿// Check for location services active and get position
+function getPosition() {
     if (navigator.geolocation) { // Check for location capability and get weather if true
         navigator.geolocation.getCurrentPosition(getAPI);
     } else {
@@ -27,12 +27,12 @@ function createStr(data) { // Populate variables from API data return
         city = data.name,
         arrTest = [];
 
+    // Create string for weather description and icon image src string
     data.weather.forEach(function (list) {
-        weather.push(list.main, 'http://openweathermap.org/img/w/' + list.icon + '.png'); // Creates string for icon image src string
+        weather.push(list.main, 'http://openweathermap.org/img/w/' + list.icon + '.png');
     });
 
-    prtAlert(weather);
-
+    // Cycle through weather array and post description and icon to page
     for (var i = 1, w = 0; w < weather.length; i += 2, w += 2) {
         var icon = new Image();
         icon.src = weather[i];
@@ -41,14 +41,15 @@ function createStr(data) { // Populate variables from API data return
     }
 
     document.getElementById("city").innerHTML = city + ', ' + country;
-    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + ' C ' 
-        + Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + ' F';
-    document.getElementById("wind").innerHTML = 'Wind Speed: ' + wind.speed + ' Direction: ' + wind.deg;
-    document.getElementById("compass").style.setProperty('--direction', wind.deg);
+    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C  ' 
+        + Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + 'F';
+    document.getElementById("wind").innerHTML = 'Wind Speed: ' + Number(Math.round(wind.speed + 'e1') + 'e-1') + ' Direction: ' + Number(Math.round(wind.deg + 'e1') + 'e-1')
+    document.getElementById("compass").style.setProperty('--direction', wind.deg); //Set CSS variable to degrees of wind
 
     arrTest.push(coord, weather, tempK, wind, country, city); // Maybe use this later
 }
 
+// For test purposes to display a variables contents in the console
 function prtAlert(msg) {
     console.log(JSON.stringify(msg, null, 3));
 }
