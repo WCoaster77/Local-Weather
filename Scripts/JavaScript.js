@@ -1,18 +1,27 @@
 ﻿// Check for location services active and get position
 function getPosition() {
+
+    //For Codepen use
+    //$.getJSON("http://ip-api.com/json", getAPI)
+
+    //For Regular use
     if (navigator.geolocation) { // Check for location capability and get weather if true
         navigator.geolocation.getCurrentPosition(getAPI);
     } else {
         console.log("Geolocatioin is not supported on your browser.");
-        test.innerHTML = "Geolocatioin is not supported on your browser.";
     }
 }
 
 function getAPI(position) { // Use location from position to populate weather data API call
 
+    // For Codepen use
+    //var lat = position.lat;
+    //var long = position.lon;
+
+    // For Regular use
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
-
+    
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long +
         "&APPID=5d350991d758cab06246c66f77821968", createStr);
 }
