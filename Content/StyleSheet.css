@@ -18,10 +18,10 @@ main {
     font-size: 2em;
 }
 
-main p {
-
-}
-
 #compass { /*Direction variable is set in javaScript. Used to rotate compass for wind direction*/
+    -ms-transform: rotate(calc(var(--direction) * 1deg));
+    -moz-transform: rotate(calc(var(--direction) * 1deg));
+    -o-transform: rotate(calc(var(--direction) * 1deg));
+    -webkit-transform: rotate(calc(var(--direction) * 1deg));
     transform: rotate(calc(var(--direction) * 1deg));
 }

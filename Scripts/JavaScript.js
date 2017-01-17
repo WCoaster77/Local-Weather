@@ -28,7 +28,7 @@ function getAPI(position) { // Use location from position to populate weather da
     
 function createStr(data) { // Populate variables from API data return
 
-    var coord = data.coord,
+    var coord = data.coords,
         weather = [],
         tempK = data.main.temp,
         wind = data.wind,
@@ -50,12 +50,23 @@ function createStr(data) { // Populate variables from API data return
     }
 
     document.getElementById("city").innerHTML = city + ', ' + country;
-    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C  ' 
-        + Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + 'F';
-    document.getElementById("wind").innerHTML = 'Wind Speed: ' + Number(Math.round(wind.speed + 'e1') + 'e-1') + ' Direction: ' + Number(Math.round(wind.deg + 'e1') + 'e-1')
+    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C';
+    document.getElementById("wind").innerHTML = 'Wind Speed: ' + Number(Math.round(wind.speed + 'e1') + 'e-1') + ' Direction: ' + Number(Math.round(wind.deg + 'e1') + 'e-1');
     document.getElementById("compass").style.setProperty('--direction', wind.deg); //Set CSS variable to degrees of wind
 
     arrTest.push(coord, weather, tempK, wind, country, city); // Maybe use this later
+}
+
+function convertTemp() {
+    var str = document.getElementById("temp").textContent;
+    var scale = str.slice(-1);
+    var tempK = str.slice(0, str.length - 1);
+    
+    if (scale === 'C') {
+        document.getElementById("temp").innerHTML = Number(Math.round(tempK * 1.8 + 32 + 'e0') + 'e-0') + 'F';
+    } else {
+        document.getElementById("temp").innerHTML = Number(Math.round((tempK - 32) * 5 / 9 + 'e0') + 'e-0') + 'C';
+    }
 }
 
 // For test purposes to display a variables contents in the console
@@ -64,3 +75,6 @@ function prtAlert(msg) {
 }
 
 getPosition();
+
+//    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C ' 
+//+Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + 'F';
