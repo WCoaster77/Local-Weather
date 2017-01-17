@@ -49,14 +49,15 @@ function createStr(data) { // Populate variables from API data return
         document.getElementById("icon").appendChild(icon).width = '75';
     }
 
+    // Populate rest of page
     document.getElementById("city").innerHTML = city + ', ' + country;
+    // Initial temp displayed as Celcius
     document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C';
     document.getElementById("wind").innerHTML = 'Wind Speed: ' + Number(Math.round(wind.speed + 'e1') + 'e-1') + ' Direction: ' + Number(Math.round(wind.deg + 'e1') + 'e-1');
     document.getElementById("compass").style.setProperty('--direction', wind.deg); //Set CSS variable to degrees of wind
-
-    arrTest.push(coord, weather, tempK, wind, country, city); // Maybe use this later
 }
 
+// Button function to convert from one temp scale to the other
 function convertTemp() {
     var str = document.getElementById("temp").textContent;
     var scale = str.slice(-1);
@@ -74,7 +75,5 @@ function prtAlert(msg) {
     console.log(JSON.stringify(msg, null, 3));
 }
 
+//Initialize Page
 getPosition();
-
-//    document.getElementById("temp").innerHTML = Number(Math.round(tempK - 273 + 'e0') + 'e-0') + 'C ' 
-//+Number(Math.round((tempK - 273) * 9 / 5 + 32 + 'e0') + 'e-0') + 'F';
